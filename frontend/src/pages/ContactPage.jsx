@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import { Mail, MessageSquare, CheckCircle2 } from 'lucide-react'
+import { Mail, MessageSquare, CheckCircle2, MapPin } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import Navigation from '@/components/Navigation'
@@ -317,6 +317,24 @@ export default function ContactPage() {
                       >
                         info@govisibi.ai
                       </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white border border-slate-300 rounded-xl p-8">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-white flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-6 h-6 text-slate-950" />
+                    </div>
+                    <div>
+                      <h3 className="font-open-sans font-normal text-xl leading-[1.3] text-slate-950 mb-2">Address</h3>
+                      <address className="font-space-mono text-sm text-slate-950 not-italic leading-relaxed">
+                        Visibi Ai<br />
+                        167-169 Great Portland Street<br />
+                        5th Floor<br />
+                        London<br />
+                        W1W 5PF
+                      </address>
                     </div>
                   </div>
                 </div>
