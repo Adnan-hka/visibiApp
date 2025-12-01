@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { Mail, MessageSquare, CheckCircle2 } from 'lucide-react'
@@ -6,6 +6,9 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import Navigation from '@/components/Navigation'
 import Breadcrumbs from '@/components/Breadcrumbs'
+
+// Replace this with your actual reCAPTCHA site key
+const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || 'YOUR_RECAPTCHA_SITE_KEY'
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false)
@@ -19,19 +22,49 @@ export default function ContactPage() {
     message: ''
   })
 
+  useEffect(() => {
+    // Load reCAPTCHA script
+    const script = document.createElement('script')
+    script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`
+    script.async = true
+    document.head.appendChild(script)
+
+    return () => {
+      // Cleanup script on unmount
+      document.head.removeChild(script)
+    }
+  }, [])
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
     setLoading(true)
 
     try {
+      // Execute reCAPTCHA
+      const token = await new Promise((resolve, reject) => {
+        if (typeof window.grecaptcha === 'undefined') {
+          reject(new Error('reCAPTCHA not loaded'))
+          return
+        }
+
+        window.grecaptcha.ready(() => {
+          window.grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit' })
+            .then(resolve)
+            .catch(reject)
+        })
+      })
+
       const apiUrl = (import.meta.env.VITE_API_URL || 'https://visibiapp-production.up.railway.app').replace(/\/$/, '')
 
       const res = await fetch(`${apiUrl}/api/send-email`, {
         method: 'POST',
         mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          recaptchaToken: token
+        }),
       })
 
       if (!res.ok) {
@@ -76,6 +109,13 @@ export default function ContactPage() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Contact Us | VISIBI" />
         <meta name="twitter:description" content="Ready to improve your brand's AI visibility? Contact us today." />
+
+        {/* reCAPTCHA Style Override */}
+        <style>{`
+          .grecaptcha-badge {
+            visibility: visible !important;
+          }
+        `}</style>
       </Helmet>
 
       <div className="absolute inset-0 -z-10 h-full w-full bg-slate-300/60 bg-[linear-gradient(to_right,#1d4ed80A_1px,transparent_1px),linear-gradient(to_bottom,#1d4ed80A_1px,transparent_1px)] bg-[size:128px_104px]"></div>
@@ -228,13 +268,26 @@ export default function ContactPage() {
                       />
                     </div>
 
-                    <Button
-                      type="submit"
-                      disabled={loading}
-                      className="bg-blue-700 text-white hover:bg-blue-800 rounded-full py-3 px-6 h-auto font-inter font-semibold text-md transition-all disabled:opacity-70 disabled:cursor-not-allowed"
-                    >
-                      {loading ? 'Sending...' : 'Submit Request'}
-                    </Button>
+                    <div className="space-y-4">
+                      <Button
+                        type="submit"
+                        disabled={loading}
+                        className="bg-blue-700 text-white hover:bg-blue-800 rounded-full py-3 px-6 h-auto font-inter font-semibold text-md transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+                      >
+                        {loading ? 'Sending...' : 'Submit Request'}
+                      </Button>
+                      <p className="text-xs text-slate-600 font-space-mono">
+                        This site is protected by reCAPTCHA and the Google{' '}
+                        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:underline">
+                          Privacy Policy
+                        </a>{' '}
+                        and{' '}
+                        <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:underline">
+                          Terms of Service
+                        </a>{' '}
+                        apply.
+                      </p>
+                    </div>
                     {error && (
                       <p className="text-sm text-red-600 font-space-mono">{error}</p>
                     )}
