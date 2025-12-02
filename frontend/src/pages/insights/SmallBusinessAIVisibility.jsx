@@ -740,9 +740,11 @@ export default function SmallBusinessAIVisibility() {
           </p>
         </div>
       </section>
+        </article>
+      </main>
 
       {/* Footer */}
-      <footer className="max-w-full md:max-w-[90%] mx-auto px-8 py-12 mt-0 border-t border-gray-200 bg-white rounded-xl rounded-bl-none rounded-br-none z-10">
+      <footer className="max-w-full md:max-w-[90%] mx-auto px-8 py-12 mt-24 border-t border-gray-200 bg-white rounded-xl rounded-bl-none rounded-br-none z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           <div className="space-y-6">
             <div className="flex items-center gap-2">
@@ -788,8 +790,6 @@ export default function SmallBusinessAIVisibility() {
           </div>
         </div>
       </footer>
-        </article>
-      </main>
     </div>
   )
 }
