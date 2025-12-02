@@ -17,8 +17,18 @@
     <title>VISIBI - AI Brand Analysis</title>
     <style>
       /* Hide sub-frame error messages */
-      #sub-frame-error {
+      #sub-frame-error,
+      iframe[name="sub-frame-error"],
+      div[id*="sub-frame"],
+      iframe[src*="sub-frame"] {
         display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        position: absolute !important;
+        top: -9999px !important;
+        left: -9999px !important;
       }
     </style>
   </head>
