@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
-import { CheckCircle, ArrowRight } from 'lucide-react'
+import { CheckCircle, ArrowRight, ArrowLeft, Calendar, Clock } from 'lucide-react'
 import Navigation from '../../components/Navigation'
 import Breadcrumbs from '../../components/Breadcrumbs'
 import { Button } from '@/components/ui/button'
@@ -66,212 +66,225 @@ export default function SmallBusinessAIVisibility() {
 
       <Navigation currentPage="insights" />
 
-      <div className="max-w-full md:max-w-[90%] mx-auto px-6 md:px-16 mt-8">
-        <Breadcrumbs 
-          items={[
-            { label: 'Home', path: '/' },
-            { label: 'Insights', path: '/insights' },
-            { label: '7 Practical Steps for Small Businesses', path: '/insights/small-business-ai-visibility-guide' }
-          ]}
-        />
-      </div>
-
       {/* Hero Section */}
-      <section className="max-w-4xl mx-auto px-4 py-12">
-        {/* Author Card */}
-        <div className="flex items-center gap-4 mb-6 bg-white rounded-lg shadow-sm border border-slate-200 p-4">
-          <img 
-            src="https://media.licdn.com/dms/image/v2/C4E03AQFpavOujT8QHg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1654520723970?e=1766016000&v=beta&t=obPe99SCKsDgrA5ahyRoO_KPHuaMrMN8S3C6DUGFU1g"
-            alt="Dan"
-            width="48"
-            height="48"
-            className="w-12 h-12 rounded-full object-cover"
-          />
-          <div className="flex-1">
-            <div className="font-semibold text-slate-900 font-open-sans">Dan</div>
-            <div className="text-sm text-slate-600 font-open-sans">Founder & Head of GEO Strategy, govisibi.ai</div>
-          </div>
-          <a 
-            href="https://www.linkedin.com/in/adnan-khan-5a1a1858/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-700 text-sm font-medium"
-          >
-            LinkedIn →
-          </a>
+      <section className="max-w-full md:max-w-[90%] mx-auto mb-0 mt-12 relative bg-[#FAFAFB] border border-b border-slate-200 rounded-xl rounded-bl-none rounded-br-none overflow-hidden">
+        <div className="absolute inset-x-0 bottom-0 h-64 pointer-events-none">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[length:14px_14px]"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#FAFAFB] via-white/40 to-[#FAFAFB]"></div>
         </div>
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
-          <img 
-            src="https://images.unsplash.com/photo-1645397925426-cf18e08fc019?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzbWFsbCUyMGJ1c2luZXNzJTIwQUklMjB0ZWNobm9sb2d5fGVufDF8fHx8MTc2NDYwNzU2OXww&ixlib=rb-4.1.0&q=80&w=1080"
-            alt="AI Technology for Small Business"
-            width="1080"
-            height="256"
-            className="w-full h-64 object-cover"
-          />
-          <div className="p-8">
-            <h1 className="font-open-sans text-3xl md:text-5xl font-semibold text-slate-900 mb-4">
-              Can't See Your Business in AI Results? 7 Practical Steps for Small Businesses on a Tiny Budget
-            </h1>
-            
-            <div className="space-y-4 font-open-sans text-md leading-relaxed text-slate-600">
-              <p>If you run a small business, this probably sounds familiar:</p>
-              
-              <ul className="space-y-2 pl-5 list-disc">
-                <li>Everyone's talking about AI—ChatGPT, Google's AI Overviews, Gemini...</li>
-                <li>You search for your service, and you're nowhere to be found.</li>
-                <li>You don't have the budget for big agencies or fancy tools.</li>
-              </ul>
-              
-              <p className="italic">It's frustrating.</p>
-              
-              <div className="bg-blue-50 border-l-4 border-blue-500 p-4 my-6">
-                <p className="text-slate-800">
-                  <strong>Here's the good news:</strong> you don't need a huge brand or massive budget to start showing up in AI answers and modern search results. What you need is to be clear, consistent, and easy for both customers and machines to understand.
+
+        <div className="lg:block h-full w-full">
+          <div className="relative z-10 py-24 border-l border-r border-slate-200">
+            <div className="max-w-4xl mx-auto px-8 md:px-16">
+              <Link to="/insights">
+                <Button variant="outline" className="px-4 py-2 border-slate-300 rounded-full font-medium hover:bg-slate-50 mb-8">
+                  <span className="text-blue-700 inline-flex items-center">
+                    <ArrowLeft className="w-4 h-4 mr-2" />
+                    Back to Insights
+                  </span>
+                </Button>
+              </Link>
+
+              <div className="text-left pb-8">
+                <Breadcrumbs items={[
+                  { label: "Home", path: "/" },
+                  { label: "Insights", path: "/insights" },
+                  { label: "7 Practical Steps for Small Businesses" }
+                ]} />
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-center gap-4 text-sm text-slate-600 font-space-mono">
+                  <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full font-medium">Strategy</span>
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4" />
+                    <span>Dec 1, 2025</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4" />
+                    <span>10 min read</span>
+                  </div>
+                </div>
+
+                <h1 className="font-open-sans text-4xl md:text-6xl font-semibold tracking-tight text-slate-950 md:leading-[1.15]">
+                  Can't See Your Business in AI Results? 7 Practical Steps for Small Businesses
+                </h1>
+
+                {/* Author Card */}
+                <div className="flex items-center gap-4 py-4">
+                  <img 
+                    src="https://media.licdn.com/dms/image/v2/C4E03AQFpavOujT8QHg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1654520723970?e=1766016000&v=beta&t=obPe99SCKsDgrA5ahyRoO_KPHuaMrMN8S3C6DUGFU1g"
+                    alt="Dan"
+                    width="48"
+                    height="48"
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                  <div>
+                    <div className="font-semibold text-slate-900 font-open-sans">Dan</div>
+                    <div className="text-sm text-slate-600 font-open-sans">Founder & Head of GEO Strategy, govisibi.ai</div>
+                  </div>
+                  <a 
+                    href="https://www.linkedin.com/in/adnan-khan-5a1a1858/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="ml-auto text-blue-600 hover:text-blue-700 text-sm font-medium"
+                  >
+                    LinkedIn →
+                  </a>
+                </div>
+
+                <p className="text-xl md:text-2xl font-light text-slate-700 font-open-sans leading-relaxed">
+                  7 practical, low-cost steps any small business can take to improve their AI visibility without breaking the bank.
                 </p>
               </div>
-              
-              <p>
-                This article breaks down 7 practical, low-cost steps any small business can take to improve their AI visibility. These actions can start showing results in a few weeks to a few months—giving you a realistic path forward without breaking the bank.
-              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Step 1 */}
-      <section className="max-w-4xl mx-auto px-4 py-8">
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
-          <img 
-            src="https://images.unsplash.com/photo-1551590192-8070a16d9f67?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGluZm9ybWF0aW9uJTIwY2xhcml0eXxlbnwxfHx8fDE3NjQ2MDc1NzB8MA&ixlib=rb-4.1.0&q=80&w=1080"
-            alt="Clear business information"
-            width="1080" height="224" className="w-full h-56 object-cover"
-          />
-          <div className="p-8">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="flex-shrink-0 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">1</span>
-              <h2 className="font-open-sans text-2xl font-semibold text-slate-900">Get Your "Who / What / Where" Absolutely Clear (Everywhere)</h2>
+      {/* Main Content */}
+      <main className="max-w-full md:max-w-[90%] mx-auto px-8 py-16 relative z-10 bg-white border-l border-r border-slate-300 mb-16 rounded-b-xl">
+        <div className="lg:block absolute h-full w-0 md:w-16 bg-slate-200/20 border-0 md:border-r md:border-t-0 md:border-slate-200 left-0 top-0 pattern-background"></div>
+        <div className="lg:block absolute h-full w-0 md:w-16 bg-slate-200/20 border-0 md:border-l md:border-t-0 md:border-slate-200 right-0 top-0 pattern-background"></div>
+
+        <article className="max-w-4xl mx-auto md:px-16">
+          {/* Introduction */}
+          <section className="mb-12">
+            <p className="text-slate-700 leading-relaxed mb-6 font-open-sans">
+              If you run a small business, this probably sounds familiar:
+            </p>
+            
+            <ul className="space-y-3 mb-6 pl-6">
+              <li className="text-slate-700 leading-relaxed font-open-sans">Everyone's talking about AI—ChatGPT, Google's AI Overviews, Gemini...</li>
+              <li className="text-slate-700 leading-relaxed font-open-sans">You search for your service, and you're nowhere to be found.</li>
+              <li className="text-slate-700 leading-relaxed font-open-sans">You don't have the budget for big agencies or fancy tools.</li>
+            </ul>
+            
+            <p className="text-slate-700 leading-relaxed mb-6 font-open-sans italic">
+              It's frustrating.
+            </p>
+            
+            <div className="bg-blue-50 border-l-4 border-blue-500 rounded-r-lg p-6 mb-6">
+              <p className="text-slate-700 leading-relaxed font-open-sans">
+                <strong className="text-slate-900">Here's the good news:</strong> you don't need a huge brand or massive budget to start showing up in AI answers and modern search results. What you need is to be clear, consistent, and easy for both customers and machines to understand.
+              </p>
             </div>
             
-            <p className="font-open-sans text-md text-slate-600 mb-4">
+            <p className="text-slate-700 leading-relaxed font-open-sans">
+              This article breaks down 7 practical, low-cost steps any small business can take to improve their AI visibility. These actions can start showing results in a few weeks to a few months—giving you a realistic path forward without breaking the bank.
+            </p>
+          </section>
+
+          {/* Step 1 */}
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold text-slate-900 mb-6 font-open-sans">1. Get Your "Who / What / Where" Absolutely Clear (Everywhere)</h2>
+            
+            <p className="text-slate-700 leading-relaxed mb-6 font-open-sans">
               AI systems can't recommend you if they're not sure:
             </p>
             
-            <ul className="space-y-2 pl-5 mb-6 font-open-sans text-md text-slate-600 list-disc">
-              <li><strong>Who</strong> you are</li>
-              <li><strong>What</strong> you do</li>
-              <li><strong>Where</strong> you do it</li>
+            <ul className="space-y-2 mb-6 pl-6">
+              <li className="text-slate-700 font-open-sans"><strong className="text-slate-900">Who</strong> you are</li>
+              <li className="text-slate-700 font-open-sans"><strong className="text-slate-900">What</strong> you do</li>
+              <li className="text-slate-700 font-open-sans"><strong className="text-slate-900">Where</strong> you do it</li>
             </ul>
             
-            <p className="font-open-sans text-md text-slate-600 mb-6">
-              Your first priority is <strong>clarity</strong>, not complexity.
+            <p className="text-slate-700 leading-relaxed mb-6 font-open-sans">
+              Your first priority is <strong className="text-slate-900">clarity</strong>, not complexity.
             </p>
             
-            <div className="bg-slate-50 border border-slate-200 rounded-lg p-6 mb-6">
-              <h3 className="font-space-mono text-lg font-semibold text-slate-900 mb-4 uppercase">Action steps:</h3>
+            <div className="bg-slate-50 rounded-lg border border-slate-200 p-6 mb-6">
+              <h3 className="text-lg font-semibold text-slate-900 mb-4 font-open-sans">Action steps:</h3>
               
-              <div className="space-y-4 font-open-sans text-md text-slate-600">
+              <div className="space-y-4">
                 <div>
-                  <p className="mb-2"><strong>Use the same name, address, and phone number (NAP) everywhere:</strong></p>
-                  <ul className="space-y-1 pl-5 list-disc">
-                    <li>Website</li>
-                    <li>Google Business Profile</li>
-                    <li>Facebook / Instagram / LinkedIn</li>
-                    <li>Key local/industry directories (Yell, Yelp, local chamber, trusted trade associations)</li>
+                  <p className="text-slate-700 leading-relaxed mb-2 font-open-sans"><strong className="text-slate-900">Use the same name, address, and phone number (NAP) everywhere:</strong></p>
+                  <ul className="space-y-1 pl-6">
+                    <li className="text-slate-700 font-open-sans">Website</li>
+                    <li className="text-slate-700 font-open-sans">Google Business Profile</li>
+                    <li className="text-slate-700 font-open-sans">Facebook / Instagram / LinkedIn</li>
+                    <li className="text-slate-700 font-open-sans">Key local/industry directories (Yell, Yelp, local chamber, trusted trade associations)</li>
                   </ul>
                 </div>
                 
                 <div>
-                  <p className="mb-2"><strong>On your homepage, write your main heading in one clear sentence that explains your business:</strong></p>
-                  <ul className="space-y-1 pl-5 list-disc">
-                    <li>"We [do X] for [type of customer] in [place]."</li>
-                    <li>"If you have [these problems], we can help."</li>
+                  <p className="text-slate-700 leading-relaxed mb-2 font-open-sans"><strong className="text-slate-900">On your homepage, write your main heading in one clear sentence that explains your business:</strong></p>
+                  <ul className="space-y-1 pl-6">
+                    <li className="text-slate-700 font-open-sans">"We [do X] for [type of customer] in [place]."</li>
+                    <li className="text-slate-700 font-open-sans">"If you have [these problems], we can help."</li>
                   </ul>
                 </div>
               </div>
             </div>
             
-            <div className="bg-green-50 border-l-4 border-green-500 p-4 mb-6">
-              <p className="font-open-sans text-slate-700 mb-2"><strong>Examples:</strong></p>
-              <ul className="space-y-2 font-open-sans text-md text-slate-600">
-                <li>"We install and maintain commercial air conditioning for offices across Birmingham and the West Midlands."</li>
-                <li>"We provide bookkeeping and payroll for small businesses in Manchester."</li>
+            <div className="bg-green-50 border-l-4 border-green-500 rounded-r-lg p-6 mb-6">
+              <p className="text-slate-700 leading-relaxed mb-3 font-open-sans"><strong className="text-slate-900">Examples:</strong></p>
+              <ul className="space-y-2 pl-6">
+                <li className="text-slate-700 font-open-sans">"We install and maintain commercial air conditioning for offices across Birmingham and the West Midlands."</li>
+                <li className="text-slate-700 font-open-sans">"We provide bookkeeping and payroll for small businesses in Manchester."</li>
               </ul>
             </div>
             
-            <p className="font-open-sans text-md text-slate-600">
+            <p className="text-slate-700 leading-relaxed font-open-sans">
               Simple clarity helps both customers and AI systems understand you instantly.
             </p>
-          </div>
-        </div>
-      </section>
+          </section>
 
-      {/* Step 2 */}
-      <section className="max-w-4xl mx-auto px-4 py-8">
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
-          <img 
-            src="https://images.unsplash.com/photo-1633632799503-c8cff57c17f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnb29nbGUlMjBidXNpbmVzcyUyMHN0b3JlZnJvbnR8ZW58MXx8fHwxNzY0NjA3NTY5fDA&ixlib=rb-4.1.0&q=80&w=1080"
-            alt="Google Business Profile"
-            width="1080" height="224" className="w-full h-56 object-cover"
-          />
-          <div className="p-8">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="flex-shrink-0 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">2</span>
-              <h2 className="font-open-sans text-2xl font-semibold text-slate-900">Treat Your Google Business Profile Like a Mini-Website</h2>
-            </div>
+          {/* Step 2 */}
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold text-slate-900 mb-6 font-open-sans">2. Treat Your Google Business Profile Like a Mini-Website</h2>
             
-            <p className="font-open-sans text-md text-slate-600 mb-6">
+            <p className="text-slate-700 leading-relaxed mb-6 font-open-sans">
               For many small businesses, Google Business Profile (GBP) is more important than your blog or even parts of your website. It's often the first place Google and AI systems check to understand a local business.
             </p>
             
-            <div className="bg-slate-50 border border-slate-200 rounded-lg p-6 mb-6">
-              <h3 className="font-space-mono text-lg font-semibold text-slate-900 mb-4 uppercase">Action steps:</h3>
+            <div className="bg-slate-50 rounded-lg border border-slate-200 p-6 mb-6">
+              <h3 className="text-lg font-semibold text-slate-900 mb-4 font-open-sans">Action steps:</h3>
               
-              <ul className="space-y-3 font-open-sans text-md text-slate-600">
+              <ul className="space-y-3">
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span>Choose the right primary category (be specific, not vague).</span>
+                  <span className="text-slate-700 font-open-sans">Choose the right primary category (be specific, not vague).</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span>Add all relevant services, each with a short, clear description.</span>
+                  <span className="text-slate-700 font-open-sans">Add all relevant services, each with a short, clear description.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="mb-1">Upload real photos of:</p>
-                    <ul className="pl-5 space-y-1 mt-2 list-disc">
-                      <li>Your team</li>
-                      <li>Your work</li>
-                      <li>Your premises / van / shop</li>
+                    <p className="text-slate-700 font-open-sans mb-1">Upload real photos of:</p>
+                    <ul className="pl-6 space-y-1 mt-2">
+                      <li className="text-slate-700 font-open-sans">Your team</li>
+                      <li className="text-slate-700 font-open-sans">Your work</li>
+                      <li className="text-slate-700 font-open-sans">Your premises / van / shop</li>
                     </ul>
                   </div>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="mb-1">Post a short update every 1–2 weeks:</p>
-                    <ul className="pl-5 space-y-1 mt-2 list-disc">
-                      <li>Recent jobs</li>
-                      <li>Special offers</li>
-                      <li>Helpful tips</li>
+                    <p className="text-slate-700 font-open-sans mb-1">Post a short update every 1–2 weeks:</p>
+                    <ul className="pl-6 space-y-1 mt-2">
+                      <li className="text-slate-700 font-open-sans">Recent jobs</li>
+                      <li className="text-slate-700 font-open-sans">Special offers</li>
+                      <li className="text-slate-700 font-open-sans">Helpful tips</li>
                     </ul>
                   </div>
                 </li>
               </ul>
             </div>
             
-            <div className="bg-amber-50 border-l-4 border-amber-500 p-4">
-              <p className="font-open-sans text-slate-800 mb-3"><strong>Crucially: Ask customers for Google reviews that mention the service and location.</strong></p>
-              <p className="font-open-sans text-md text-slate-600 italic">
+            <div className="bg-amber-50 border-l-4 border-amber-500 rounded-r-lg p-6">
+              <p className="text-slate-700 leading-relaxed mb-3 font-open-sans"><strong className="text-slate-900">Crucially: Ask customers for Google reviews that mention the service and location.</strong></p>
+              <p className="text-slate-700 leading-relaxed font-open-sans italic">
                 "If you're happy with the work, could you please mention the service and your area in your review? It really helps other local customers find us."
               </p>
-              <p className="font-open-sans text-md text-slate-600 mt-3">
+              <p className="text-slate-700 leading-relaxed font-open-sans mt-3">
                 This boosts your local SEO and builds trust signals that AI systems recognize.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
 
       {/* Step 3 */}
       <section className="max-w-4xl mx-auto px-4 py-8">
@@ -775,6 +788,8 @@ export default function SmallBusinessAIVisibility() {
           </div>
         </div>
       </footer>
+        </article>
+      </main>
     </div>
   )
 }
