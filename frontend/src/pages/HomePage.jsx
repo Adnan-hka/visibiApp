@@ -17,6 +17,7 @@ import { Badge } from '@/components/ui/badge'
 import Navigation from '@/components/Navigation'
 import QueryCustomizer from '@/components/QueryCustomizer'
 import { getLatestArticles } from '@/data/articles'
+import { executeRecaptcha } from '@/utils/recaptcha'
 
 export default function HomePage() {
   useEffect(() => {
@@ -106,6 +107,13 @@ export default function HomePage() {
 
     setNewFormLoading(true)
 
+    let recaptchaToken = null
+    try {
+      recaptchaToken = await executeRecaptcha('brand_analysis_form')
+    } catch (recaptchaError) {
+      console.warn('reCAPTCHA verification failed, continuing without token', recaptchaError)
+    }
+
     try {
       let formattedUrl = newBrandUrl.trim()
       if (!formattedUrl.match(/^https?:\/\//i)) {
@@ -125,6 +133,7 @@ export default function HomePage() {
           email: newEmail.trim(),
           custom_queries: [],
           custom_keywords: newCompanyName ? [newCompanyName] : [],
+          recaptchaToken,
         }),
       })
 
@@ -174,6 +183,13 @@ export default function HomePage() {
     setLoading(true)
     setError('')
 
+    let recaptchaToken = null
+    try {
+      recaptchaToken = await executeRecaptcha('legacy_brand_analysis_form')
+    } catch (recaptchaError) {
+      console.warn('reCAPTCHA verification failed, continuing without token', recaptchaError)
+    }
+
     try {
       const apiUrl = (import.meta.env.VITE_API_URL || 'https://visibiapp-production.up.railway.app').replace(/\/$/, '')
       
@@ -189,6 +205,7 @@ export default function HomePage() {
           email: email,
           custom_queries: customQueries || [],
           custom_keywords: customKeywords || [],
+          recaptchaToken,
         }),
       })
 
@@ -419,7 +436,7 @@ export default function HomePage() {
                 <h2 className="font-open-sans text-3xl md:text-5xl font-thin block md:leading-[1] pb-4 tracking-tight text-slate-950">
                   Make Your Business More Productive With AI.
                 </h2>
-                <p className="font-open-sans text-md md:text-lg md:leading-[1.6] text-slate-700 pb-4">
+                <p className="font-open-sans font-thin text-md md:text-xl md:leading-[1.4] text-slate-700 pb-4">
                 AI agents decide how work gets done. If AI systems can't find your brand, you're out of buyer consideration. If your teams don't use agents, competitors move faster.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-left">
@@ -503,21 +520,21 @@ export default function HomePage() {
 
 
       {/* VISIBI helps you win in both worlds Section */}
-      <section className="max-w-full md:max-w-[90%] mx-auto px-4 md:px-16 py-20 md:py-24 relative z-10 bg-white border-l border-r border-slate-300 mb-0.5">
+      <section className="max-w-full md:max-w-[90%] mx-auto px-4 md:px-16 py-8 md:py-16 relative z-10 bg-white border-l border-r border-slate-300 mb-0.5 pattern-background bg-blue-100">
         <div className="lg:block absolute h-full w-0 md:w-16 bg-slate-200/20 border-0 md:border-r md:border-t-0 md:border-slate-200 left-0 top-0 pattern-background"></div>
         <div className="lg:block absolute h-full w-0 md:w-16 bg-slate-200/20 border-0 md:border-l md:border-t-0 md:border-slate-200 right-0 top-0 pattern-background"></div>
 
-        <div className="max-w-6xl mx-auto text-center space-y-8">
-          <h2 className="font-open-sans font-semibold text-3xl md:text-5xl md:leading-[1.3] text-slate-950">
+        <div className="max-w-4xl mx-0 text-left space-y-8 bg-white p-20 border border-slate-200 border-l-0">
+          <h2 className="font-open-sans font-medium text-3xl md:text-6xl md:leading-[1.2] text-slate-950">
             VISIBI helps you win in both worlds
-            <span className="font-open-sans font-thin text-md md:text-5xl leading-[1.5] md:leading-[1.3] text-slate-950 block">AI discovery and AI automation.</span>
-          </h2>
-          <p className="font-open-sans text-md md:text-lg leading-[1.5] text-slate-950 max-w-3xl mx-auto">
-            VISIBI is the only agency engineered to optimise your brand for AI engines and build autonomous agents that transform how your business operates.
-          </p>
-          <p className="font-open-sans text-md md:text-lg leading-[1.5] text-slate-950 max-w-3xl mx-auto">
-            Experience a surge in business growth with increased leads, faster workflows, and significant cost savings. Our solutions ensure your brand is not only visible but also more efficient, providing tangible results that drive business success.
-          </p>
+            </h2>
+            <h3 className="font-open-sans font-thin text-2xl md:text-5xl md:leading-[1.3] text-slate-950">AI discovery and AI automation.</h3>
+            <p className="font-open-sans font-thin text-md md:text-xl leading-[1.5] text-slate-950 max-w-3xl mx-0 mb-4">
+              VISIBI is the only agency engineered to optimise your brand for AI engines and build autonomous agents that transform how your business operates.
+            </p>
+            <p className="font-open-sans font-thin text-md md:text-lg leading-[1.5] text-slate-950 max-w-3xl mx-0">
+              Experience a surge in business growth with increased leads, faster workflows, and significant cost savings. Our solutions ensure your brand is not only visible but also more efficient, providing tangible results that drive business success.
+            </p>
         </div>
       </section>
 
@@ -1156,12 +1173,12 @@ export default function HomePage() {
                   )
                 })}
               </div>
-
+{/* 
               <div className="text-center mt-8">
-                <p className="font-open-sans text-xl md:text-2xl font-semibold text-slate-950 bg-blue-50 border border-blue-700 py-4 px-8 inline-block">
+                <p className="font-open-sans text-xl md:text-3xl font-semibold text-slate-950 border-0 py-20 px-8 inline-block">
                   One partner for AI discovery + AI productivity.
                 </p>
-              </div>
+              </div> */}
             </div>
           </section>
 
