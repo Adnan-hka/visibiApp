@@ -64,9 +64,16 @@ else:
     allowed_origins = [
         "http://localhost:5173",
         "http://localhost:5174",
+        "http://localhost:5176",
+        "http://localhost:5177",
+        "http://localhost:5178",
+        "http://localhost:5179",
         "http://localhost:3000",
         "http://127.0.0.1:5173",
         "http://127.0.0.1:5174",
+        "http://127.0.0.1:5176",
+        "http://127.0.0.1:5177",
+        "http://127.0.0.1:5178",
         "http://127.0.0.1:3000",
         "https://govisibi.ai",
         "https://www.govisibi.ai",
@@ -610,6 +617,18 @@ async def submit_brand_analysis(request: BrandAnalysisRequest, background_tasks:
     4. Returns success response immediately
     """
     try:
+        # Validate reCAPTCHA before processing (if token provided)
+        if request.recaptchaToken:
+            if not verify_recaptcha(request.recaptchaToken):
+                raise HTTPException(
+                    status_code=400,
+                    detail="reCAPTCHA verification failed. Please try again."
+                )
+        else:
+            # In development, allow requests without reCAPTCHA
+            # In production, you should enforce reCAPTCHA by setting RECAPTCHA_SECRET_KEY
+            print("⚠️ Request submitted without reCAPTCHA token")
+
         # Validate email format
         if not request.email or '@' not in request.email:
             raise HTTPException(status_code=400, detail="Invalid email address")

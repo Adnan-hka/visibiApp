@@ -297,6 +297,7 @@ class BrandAnalysisRequest(BaseModel):
     """Schema for brand analysis form submission (simplified)"""
     brand_url: str
     email: str
+    recaptchaToken: Optional[str] = None
     custom_queries: Optional[List[str]] = None
     custom_keywords: Optional[List[str]] = None
 
@@ -305,6 +306,7 @@ class BrandAnalysisRequest(BaseModel):
             "example": {
                 "brand_url": "https://www.example.com",
                 "email": "user@example.com",
+                "recaptchaToken": "token-from-client",
                 "custom_queries": ["What do you think about Example?"],
                 "custom_keywords": ["AI", "visibility"]
             }

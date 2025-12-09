@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import Navigation from '@/components/Navigation'
 import Breadcrumbs from '@/components/Breadcrumbs'
+import { executeRecaptcha } from '@/utils/recaptcha'
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false)
@@ -24,6 +25,16 @@ export default function ContactPage() {
     setError('')
     setLoading(true)
 
+    let recaptchaToken
+    try {
+      recaptchaToken = await executeRecaptcha('contact_form')
+    } catch (recaptchaError) {
+      console.error('reCAPTCHA verification failed', recaptchaError)
+      setError('Human verification failed. Please refresh the page and try again.')
+      setLoading(false)
+      return
+    }
+
     try {
       const apiUrl = (import.meta.env.VITE_API_URL || 'https://visibiapp-production.up.railway.app').replace(/\/$/, '')
 
@@ -31,7 +42,10 @@ export default function ContactPage() {
         method: 'POST',
         mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          recaptchaToken,
+        }),
       })
 
       if (!res.ok) {
